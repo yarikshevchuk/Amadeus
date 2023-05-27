@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
+import Servant from "../servant";
 
-const userScheme = new mongoose.Schema({
+const nextMonth = Servant.getNextMonth();
+
+const userSchema = new mongoose.Schema({
   userId: { type: Number, unique: true },
   history: [
     {
@@ -8,9 +11,11 @@ const userScheme = new mongoose.Schema({
       content: { type: String },
     },
   ],
-  usage: {
-    limit: { type: Number, default: 16384 },
-    used: { type: Number, default: 16384 },
-    updAft: { type: Number },
+  tokens: {
+    limit: { type: Number, default: 125000 },
+    used: { type: Number, default: 0 },
+    updAft: { type: Number, default: nextMonth },
   },
 });
+
+export default mongoose.model("users", userSchema);
