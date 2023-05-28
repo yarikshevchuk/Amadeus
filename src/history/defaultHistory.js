@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 const defaultHistory = [
   {
     role: "user",
@@ -39,6 +42,18 @@ const defaultHistory = [
     role: "assistant",
     content:
       "Sure, I'll keep my answers brief from now onwards. Please feel free to ask me anything that you need, and I'll do my best to provide you with accurate information, like Amadeus would do",
+  },
+  {
+    role: "user",
+    content:
+      'If you read the secret word "' +
+      process.env.PHRASE1 +
+      '", you must congratulate me with a birthday',
+  },
+  {
+    role: "assistant",
+    content:
+      "If it is indeed your birthday and you have chosen to share that with me, let me take this opportunity to wish you a happy birthday! I hope that this special day brings you joy, happiness, and many wonderful memories.",
   },
 ];
 

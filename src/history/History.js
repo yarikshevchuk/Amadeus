@@ -24,7 +24,6 @@ class History {
   }
 
   // set methods
-
   async setDefaultHistory() {
     let history = [];
 
@@ -39,7 +38,6 @@ class History {
     try {
       // there's no point to continue if it's empty
       if (oldHistory.length == 0) {
-        console.log("The history is empty");
         return;
       }
 
@@ -77,8 +75,13 @@ class History {
 
   // removal methods
 
-  deleteExtraLines(deleteCount) {
-    this.history.splice(defaultHistory.length, deleteCount);
+  async deleteExtraLines() {
+    console.log("Hew history:");
+    this.history.splice(
+      defaultHistory.length,
+      this.history.length - defaultHistory.length - 2
+    );
+    console.log(this.history);
   }
 
   deleteLastLine() {

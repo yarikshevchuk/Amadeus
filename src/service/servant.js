@@ -1,15 +1,28 @@
-import defaultHistory from "./history/defaultHistory.js";
+import defaultHistory from "../history/defaultHistory.js";
+import roleModel from "../models/roleModel.js";
 
 class Servant {
-  // function that sets the default history
-  static async setDefaultHistory(history) {
-    history.length = 0;
+  // creates a specified role
+  static async createRole(roleName) {
+    const role = await roleModel.findOne({ value: roleName });
+    if (role) return role.value;
 
-    for (let i = 0; i < defaultHistory.length; i++) {
-      history.push(defaultHistory[i]);
-    }
+    const newRole = await roleModel.create({ value: roleName });
+    console.log(newRole);
+    return newRole.value;
+  }
 
-    return history;
+  // function to get sender's info
+  static async extractSenderData(message) {
+    let {
+      from: { id, username, first_name },
+    } = message;
+
+    return {
+      userId: id,
+      username: username,
+      first_name: first_name,
+    };
   }
 
   // if we want to clear the history, we need to know, how much to delete
