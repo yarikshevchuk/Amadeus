@@ -46,14 +46,16 @@ const defaultHistory = [
   {
     role: "user",
     content:
-      'If you read the secret word "' +
+      'In this chat, we have a secret phrase "' +
       process.env.PHRASE1 +
-      '", you must congratulate me with a birthday',
+      '". When you hear it, that means that today is my birthday. Congratulate me, when you hear it',
   },
   {
     role: "assistant",
     content:
-      "If it is indeed your birthday and you have chosen to share that with me, let me take this opportunity to wish you a happy birthday! I hope that this special day brings you joy, happiness, and many wonderful memories.",
+      "As an AI language model, I don't have the ability to listen for a specific phrase. However, if I happen to come across the phrase \"" +
+      process.env.PHRASE1 +
+      ' " during our conversation, I will be sure to congratulate you on your birthday',
   },
 ];
 
