@@ -56,10 +56,10 @@ class Functions {
         history.addLine({ role: "user", content: process.env.LINE });
 
         const choosenPhoto = Servant.choosePhoto();
-        console.log(choosenPhoto);
 
         await ctx.telegram.sendPhoto(ctx.message.chat.id, choosenPhoto);
       }
+      console.log("It's not the time yet");
 
       let completion = await openai.createChatCompletion({
         model: "gpt-3.5-turbo",
