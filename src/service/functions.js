@@ -50,6 +50,17 @@ class Functions {
       if (tokensLeft <= 0) return ctx.reply("Montly limit was reached"); // so sad, but you need to pay
 
       // the real shit starts here
+
+      const shouldToast = await Servant.shouldToast(ctx.message.text);
+      if (shouldToast) {
+        history.addLine({ role: "user", content: process.env.LINE });
+
+        const choosenPhoto = Servant.choosePhoto();
+        console.log(choosenPhoto);
+
+        await ctx.telegram.sendPhoto(ctx.message.chat.id, choosenPhoto);
+      }
+
       let completion = await openai.createChatCompletion({
         model: "gpt-3.5-turbo",
         messages: history.get(),
@@ -76,7 +87,7 @@ class Functions {
       // updating the history in the database
       await User.updateHistory(user.userId, history.getCropped());
     } catch (error) {
-      if (error.response) {
+      if (error.response?.data) {
         if (error.response.data.error.code === "context_length_exceeded") {
           history.deleteExtraLines();
 

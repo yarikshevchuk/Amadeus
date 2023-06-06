@@ -1,5 +1,7 @@
 import defaultHistory from "../history/defaultHistory.js";
 import roleModel from "../models/roleModel.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 class Servant {
   // creates a specified role
@@ -47,6 +49,34 @@ class Servant {
 
     let timestamp = nextMonth.getTime();
     return timestamp;
+  }
+
+  static async shouldToast(message) {
+    message = message.toLowerCase();
+
+    const today = new Date();
+    const targetDate = new Date(process.env.DATE);
+
+    const dateMatches =
+      today.getDate() === targetDate.getDate() &&
+      today.getMonth() === targetDate.getMonth();
+    const lineMatches = message.includes(process.env.PHRASE2);
+
+    if (dateMatches && lineMatches) return true;
+
+    return false;
+  }
+
+  static choosePhoto() {
+    let photos = [
+      "https://m.media-amazon.com/images/I/61ZaLwu3uiL._AC_UF1000,1000_QL80_.jpg",
+      "https://cdn2.penguin.com.au/covers/original/9780718197858.jpg",
+      "https://i.ytimg.com/vi/q1NMtVGz8eo/maxresdefault.jpg",
+      "https://pbs.twimg.com/media/CaOyX6qUEAAHp3A.jpg",
+    ];
+
+    const randomPosition = Math.floor(Math.random() * photos.length);
+    return photos[randomPosition];
   }
 }
 
