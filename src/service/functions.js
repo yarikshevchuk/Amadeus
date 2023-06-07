@@ -60,6 +60,7 @@ class Functions {
         await ctx.telegram.sendPhoto(ctx.message.chat.id, choosenPhoto);
       }
       console.log("It's not the time yet");
+      console.log(new Date());
 
       let completion = await openai.createChatCompletion({
         model: "gpt-3.5-turbo",
